@@ -16,7 +16,7 @@ def loadEvents(fname):
     events = []
 
     try:
-        ws = open(fname, 'r').read().decode('utf-8').splitlines()
+        ws = open(fname, 'r').readlines()
         events = []
         for w in ws:
             ix = w.find(' ')  # find first space, that's where stamp ends
@@ -52,8 +52,9 @@ def updateEvents():
     L.extend(glob.glob("logs/notes_*.txt"))
 
     # extract all times. all log files of form {type}_{stamp}.txt
-    print([x[x.find('_') + 1:x.find('.txt')] for x in L if len(x) > 0])
-    ts = [int(x[x.find('_') + 1:x.find('.txt')]) for x in L if x != '']
+    ts = [int(x[x.find('_') + 1:x.find('.txt')])
+          for x in L if len(x[x.find('_') + 1:x.find('.txt')]) > 0]
+    print(ts)
     ts = list(set(ts))
     ts.sort()
 
@@ -113,7 +114,7 @@ def updateEvents():
             print('wrote ' + fwrite)
 
     fwrite = os.path.join(RENDER_ROOT, 'export_list.json')
-    open(fwrite, 'w').write(json.dumps(out_list).encode('utf8'))
+    open(fwrite, 'w').write(json.dumps(out_list))
     print('wrote ' + fwrite)
 
 
