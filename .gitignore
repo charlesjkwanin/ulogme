@@ -6,3 +6,4 @@ logs
 old
 .DS_Store
 .python_pid
+launch_ulogme.sh
