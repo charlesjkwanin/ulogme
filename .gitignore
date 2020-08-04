@@ -8,3 +8,4 @@ old
 .python_pid
 launch_ulogme.sh
 render/render_settings.js
+render/render_settings_example.js
